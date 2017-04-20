@@ -13,21 +13,17 @@ import com.assets.components.general.ComLabel;
 import com.assets.components.general.ComPosition;
 import com.assets.components.general.ComSprite;
 import com.assets.scripts.ScrQuit;
-import com.assets.scripts.ScrVoid;
 import com.assets.util.EngineSystem;
 import com.assets.util.script.Script;
 import com.global.TextureAtlasManager;
 import com.util.Tools;
 import com.util.graphics.Parallax;
 import com.util.graphics.Sprite;
-import com.util.scene.Attribute;
 import com.util.scene.Scene;
 import com.assets.components.group.ComButton;
 import com.assets.components.group.ComTextField;
 import com.assets.systems.group.SysButton;
 import com.assets.systems.group.SysTextField;
-import com.engine.EngineBase;
-import javafx.scene.control.MenuButton;
 
 /**
  *

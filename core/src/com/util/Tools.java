@@ -10,6 +10,10 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFont
 import com.assets.components.general.ComPosition;
 import com.util.scene.SceneManager;
 
+/**
+ *
+ * @author Jonathan Crockett
+ */
 public class Tools{
     
     //Processing

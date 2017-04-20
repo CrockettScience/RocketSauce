@@ -5,6 +5,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.util.graphics.Sprite;
 
+/**
+ *
+ * @author Jonathan Crockett
+ */
 public class ComSprite implements Component{
     
     private Sprite sprite;

@@ -7,8 +7,11 @@ import com.assets.components.general.ComFunction;
 import com.assets.components.general.ComPosition;
 import com.assets.components.general.ComSprite;
 import com.assets.components.general.ComLabel;
-import com.assets.components.general.ComLabel;
 
+/**
+ *
+ * @author Jonathan Crockett
+ */
 public class ComButton implements Component{
     
     private ComLabel label = new ComLabel();

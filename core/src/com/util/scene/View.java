@@ -1,12 +1,15 @@
 package com.util.scene;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.global.ComponentMap;
 import com.assets.components.general.ComPosition;
 
+/**
+ *
+ * @author Jonathan Crockett
+ */
 public class View{
 
     private FitViewport viewport;

@@ -1,8 +1,9 @@
 package com.util.scene;
 
-import com.util.scene.View;
-import com.util.scene.Scene;
-
+/**
+ *
+ * @author Jonathan Crockett
+ */
 public class SceneManager{
         
     private static Scene scene;

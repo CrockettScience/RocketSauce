@@ -3,6 +3,10 @@ import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
+/**
+ *
+ * @author Jonathan Crockett
+ */
 public class ComLabel implements Component {
     private String label = "";
     private BitmapFont font = new BitmapFont();

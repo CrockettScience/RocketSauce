@@ -1,6 +1,10 @@
 package com.assets.components.general;
 import com.badlogic.ashley.core.Component;
 
+/**
+ *
+ * @author Jonathan Crockett
+ */
 public class ComTimer implements Component{
 
     /**

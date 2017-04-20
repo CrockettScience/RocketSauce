@@ -1,16 +1,3 @@
-/*
-v1.0
-This Class provides simple functionality for writing .ini files on the fly.
-Entries are organized into sections, keys, and values. Note that an .ini is 
-intended to be open to editing by any outside user, therefore any values written
-using the write() method should be in plain english, and any values read using the read() method
-should be handled with caution. 
-
-v1.1
-Use readBool() and readInt() whenever possible, as these methods come
-built in with extra functionality to handle invalid parsing.
-*/
-
 package com.util;
 import java.io.File;
 import java.nio.file.*;
@@ -19,8 +6,10 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
-
+/**
+ *
+ * @author Jonathan Crockett
+ */
 public class Ini {
     private final Path INIPATH;
     private ArrayList<String> ini = new ArrayList();

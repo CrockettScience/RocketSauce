@@ -4,6 +4,10 @@ package com.assets.attributes;
 import com.util.graphics.Parallax;
 import com.util.scene.Attribute;
 
+/**
+ *
+ * @author Jonathan Crockett
+ */
 public class AttParallax implements Attribute{
     public Parallax background_0;
     public Parallax background_1;

@@ -10,6 +10,10 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import java.util.ArrayList;
 
+/**
+ *
+ * @author Jonathan Crockett
+ */
 public class Sprite{
     private int frameCount;
     
@@ -83,15 +87,6 @@ public class Sprite{
         frameCount = 1;
     }
     
-    /**
-     *
-     * @param sheet
-     * @param rows
-     * @param columns
-     * @param numberOfFrames
-     * @param fps
-     * @param idMatrix
-     */
     public Sprite(TextureRegion sheet, int rows, int columns, int numberOfFrames, int fps, int[][] idMatrix){
         frameCount = numberOfFrames;
         TextureRegion[][] tmpTex = sheet.split(sheet.getRegionWidth()/columns, sheet.getRegionHeight()/rows);
@@ -131,7 +126,7 @@ public class Sprite{
         
         animation = new Animation[max];
         for(int i = 0; i < max; i++){
-            animation[i] = new Animation(1.0f / fps, tmpList[i].toArray(new TextureRegion[1]));
+            animation[i] = new Animation(1.0f / fps,(Object) tmpList[i].toArray(new TextureRegion[1]));
         }
         
         stateTime = 0f;

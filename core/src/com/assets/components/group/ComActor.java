@@ -6,6 +6,10 @@ import com.assets.components.general.ComPosition;
 import com.assets.components.general.ComSprite;
 import com.assets.components.general.ComVelocity;
 
+/**
+ *
+ * @author Jonathan Crockett
+ */
 public class ComActor implements Component {
     
     private ComPosition pos = new ComPosition();

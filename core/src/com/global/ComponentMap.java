@@ -14,7 +14,7 @@ import com.assets.components.group.ComTextField;
 
 /**
  *
- * @author cohib
+ * @author Jonathan Crockett
  */
 public class ComponentMap{
     

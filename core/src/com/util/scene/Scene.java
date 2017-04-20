@@ -3,6 +3,10 @@ import com.badlogic.ashley.core.Entity;
 import com.engine.EngineBase;
 import java.util.HashMap;
 
+/**
+ *
+ * @author Jonathan Crockett
+ */
 public abstract class Scene{
     private final HashMap<Class<? extends Attribute>, Attribute> attributes = new HashMap<Class<? extends Attribute>, Attribute>();
     private HashMap<String, Entity> entities = new HashMap<String, Entity>();

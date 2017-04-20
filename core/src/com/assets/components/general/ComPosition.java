@@ -1,6 +1,10 @@
 package com.assets.components.general;
 import com.badlogic.ashley.core.Component;
 
+/**
+ *
+ * @author Jonathan Crockett
+ */
 public class ComPosition implements Component{
     private float x = 0.0f;
     private float y = 0.0f;

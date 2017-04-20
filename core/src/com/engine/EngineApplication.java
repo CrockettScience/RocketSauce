@@ -11,6 +11,10 @@ import com.global.Preferences;
 import com.global.TextureAtlasManager;
 import com.assets.scenes.ScnMain;
 
+/**
+ *
+ * @author Jonathan Crockett
+ */
 public class EngineApplication extends ApplicationAdapter{
 	
         public EngineApplication(Ini ini){

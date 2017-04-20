@@ -8,6 +8,10 @@ import com.util.scene.SceneManager;
 import com.util.scene.View;
 import static java.lang.Math.abs;
 
+/**
+ *
+ * @author Jonathan Crockett
+ */
 public class Parallax{
     private TiledDrawable background;
     private final int x;

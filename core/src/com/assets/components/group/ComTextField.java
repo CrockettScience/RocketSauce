@@ -5,10 +5,13 @@ import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
 import com.assets.components.general.ComBbox;
 import com.assets.components.general.ComSprite;
-import com.assets.components.general.ComLabel;
 import com.assets.components.general.ComPosition;
 import com.assets.components.general.ComLabel;
 
+/**
+ *
+ * @author Jonathan Crockett
+ */
 public class ComTextField implements Component{
     
     private ComSprite spr = new ComSprite();

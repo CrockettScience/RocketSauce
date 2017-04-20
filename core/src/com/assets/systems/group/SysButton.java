@@ -14,7 +14,7 @@ import com.global.ComponentMap;
 
 /**
  *
- * @author cohib
+ * @author Jonathan Crockett
  */
 public class SysButton extends EngineSystem {
     private ImmutableArray<Entity> entities;

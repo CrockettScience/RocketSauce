@@ -25,6 +25,10 @@ import com.util.scene.View;
 import java.util.Comparator;
 import com.assets.util.EngineSystem;
 
+/**
+ *
+ * @author Jonathan Crockett
+ */
 public class EngineBase {
     private static final SpriteBatch BATCH = new SpriteBatch();
     private static final Engine ENGINE = new Engine();

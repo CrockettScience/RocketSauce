@@ -1,5 +1,9 @@
 package com.assets.util.script;
 
+/**
+ *
+ * @author Jonathan Crockett
+ */
 public abstract class Script{
     
     protected String scriptLog;

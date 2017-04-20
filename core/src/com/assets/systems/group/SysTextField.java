@@ -1,7 +1,6 @@
 package com.assets.systems.group;
 
 import com.badlogic.ashley.core.Engine;
-import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
@@ -18,6 +17,10 @@ import com.global.ComponentMap;
 import com.util.input.TextInputProcessor;
 import com.util.Tools;
 
+/**
+ *
+ * @author Jonathan Crockett
+ */
 public class SysTextField extends EngineSystem{
     private TextInputProcessor text = new TextInputProcessor();
     private ImmutableArray<Entity> entities;

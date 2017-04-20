@@ -2,6 +2,10 @@ package com.assets.components.general;
 import com.badlogic.ashley.core.Component;
 import com.assets.util.script.Script;
 
+/**
+ *
+ * @author Jonathan Crockett
+ */
 public class ComFunction implements Component{
     private Script function;
 

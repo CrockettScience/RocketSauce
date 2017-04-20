@@ -1,7 +1,6 @@
 package com.assets.systems.group;
 
 import com.badlogic.ashley.core.Engine;
-import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
@@ -9,6 +8,10 @@ import com.assets.components.group.ComActor;
 import com.assets.util.EngineSystem;
 import com.global.ComponentMap;
 
+/**
+ *
+ * @author Jonathan Crockett
+ */
 public class SysActor extends EngineSystem {
     private ImmutableArray<Entity> entities;
     

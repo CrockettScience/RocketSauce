@@ -3,7 +3,7 @@ import com.badlogic.ashley.core.Component;
 
 /**
  *
- * @author cohib
+ * @author Jonathan Crockett
  */
 public class ComBbox implements Component{
     private float x = 0;
