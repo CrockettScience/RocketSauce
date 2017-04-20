@@ -6,24 +6,33 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.base.assets.attributes.AttParallax;
 import com.base.assets.components.general.ComBbox;
 import com.base.assets.components.general.ComFunction;
 import com.base.assets.components.general.ComLabel;
 import com.base.assets.components.general.ComPosition;
 import com.base.assets.components.general.ComSprite;
+import com.base.assets.scripts.ScrQuit;
+import com.base.assets.scripts.ScrVoid;
+import com.base.assets.util.EngineSystem;
 import com.base.assets.util.script.Script;
 import com.base.global.TextureAtlasManager;
 import com.base.util.Tools;
+import com.base.util.graphics.Parallax;
 import com.base.util.graphics.Sprite;
+import com.base.util.scene.Attribute;
 import com.base.util.scene.Scene;
 import com.rocketsauce.assets.components.componentGroups.ComButton;
 import com.rocketsauce.assets.components.componentGroups.ComTextField;
+import com.rocketsauce.assets.systems.group.SysButton;
+import com.rocketsauce.assets.systems.group.SysTextField;
+import javafx.scene.control.MenuButton;
 
 /**
  *
  * @author Jonathan Crockett
  */
-public class ScnRocketSauce extends Scene {
+public class ScnMain extends Scene {
     private static BitmapFont menuFont;
     
     @Override
@@ -35,16 +44,44 @@ public class ScnRocketSauce extends Scene {
         TextureAtlasManager.addRegion("RocketSauce", "back", new TextureRegion(new Texture(Gdx.files.internal("bg_triangles.png"))));
         TextureAtlasManager.addRegion("RocketSauce", "inputbox", new TextureRegion(new Texture(Gdx.files.internal("ui_inputbox.png"))));
         
-        
+        //load font
         menuFont = Tools.makeBitmapFont("font\\MenuFont.ttf", 28, Color.WHITE);
+        
+        //load systems
+        EngineSystem.addToEngine(new SysButton());
+        EngineSystem.addToEngine(new SysTextField());
+        
+        //load scene attributes
+        AttParallax parallax = new AttParallax();
+        parallax.background_0 = new Parallax(TextureAtlasManager.getRegion("RocketSauce", "back"), 10, 0);
+        addAttribute(parallax);
+        
+        putEntity("hey", button("Goodbye World", Gdx.graphics.getWidth() * 0.5f, Gdx.graphics.getHeight() * 0.25f, new ScrQuit()));
+        putEntity("type", inputBox("RocketSauce!", Gdx.graphics.getWidth() * 0.5f, Gdx.graphics.getHeight() * 0.5f, 28));
+    
     }
 
     @Override
     protected void destroyResources() {
+        removeAttribute(AttParallax.class);
         
+        TextureAtlasManager.disposeAtlas("RocketSauce");
+        
+        menuFont.dispose();
+        
+        EngineSystem.removeFromEngine(SysButton.class);
+        EngineSystem.removeFromEngine(SysTextField.class);
+        
+        this.removeEntities();
+    }
+
+    @Override
+    protected void sceneMain() {
+        activateEntity("hey");
+        activateEntity("type");
     }
     
-    private Entity menuButton(String bLabel, float x, float y, Script script) {
+    private Entity button(String bLabel, float x, float y, Script script) {
         Entity button = new Entity();
             
             ComPosition pos = new ComPosition();
@@ -52,7 +89,7 @@ public class ScnRocketSauce extends Scene {
             pos.setY(y);
 
             ComSprite spr = new ComSprite();
-            spr.setSprite(new Sprite(TextureAtlasManager.getRegion("main", "button"), 1, 2, 2, 10, true, true));
+            spr.setSprite(new Sprite(TextureAtlasManager.getRegion("RocketSauce", "button"), 1, 2, 2, 10, true, true));
             spr.setOffsetX(spr.getSprite().getWidth() / 2);
 
             ComBbox bbox = new ComBbox();
@@ -76,7 +113,7 @@ public class ScnRocketSauce extends Scene {
         return button;
     }
 
-    private Entity menuInputBox(String message, float x, float y, int maxSize) {
+    private Entity inputBox(String message, float x, float y, int maxSize) {
         Entity ent = new Entity();
         
             ComPosition pos = new ComPosition();
@@ -84,7 +121,7 @@ public class ScnRocketSauce extends Scene {
             pos.setY(y);
             
             ComSprite spr = new ComSprite();
-            spr.setSprite(new Sprite(TextureAtlasManager.getRegion("main", "inputBox"), 1, 2, 2, 1, true, true));
+            spr.setSprite(new Sprite(TextureAtlasManager.getRegion("RocketSauce", "inputbox"), 1, 2, 2, 1, true, true));
             spr.setOffsetX(spr.getSprite().getWidth() / 2);
             
             ComBbox bbox = new ComBbox();

@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.base.assets.attributes.AttBckColor;
 import com.base.global.Preferences;
 import com.base.global.TextureAtlasManager;
-import com.rocketsauce.assets.scenes.ScnRocketSauce;
+import com.rocketsauce.assets.scenes.ScnMain;
 
 public class EngineApplication extends ApplicationAdapter{
 	
@@ -24,7 +24,7 @@ public class EngineApplication extends ApplicationAdapter{
             EngineBase.initialize(1024);
             
             //DESIGNATE FIRST ENTRY SCENE HERE
-            SceneManager.setScene(new ScnRocketSauce());
+            SceneManager.setScene(new ScnMain());
 	}
         
 	public void render (){

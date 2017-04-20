@@ -10,6 +10,7 @@ public abstract class Scene{
 
     protected abstract void loadResources();
     protected abstract void destroyResources();
+    protected abstract void sceneMain();
     
     public void addAttribute(Attribute attr){
         attributes.put(attr.getClass(), attr);

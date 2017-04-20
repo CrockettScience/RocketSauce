@@ -15,7 +15,7 @@ public class Sprite{
     
     private final Animation[] animation;
     private int animIndex = 0;
-    private TextureRegion[] frames;
+    private Object[] frames;
     private boolean looping = true;
     
     
@@ -151,7 +151,7 @@ public class Sprite{
     }
     
     public TextureRegion getframeNumber(int frame){
-        return frames[frame];
+        return (TextureRegion) frames[frame];
     }
     
     public TextureRegion getCurrentFrame(){
@@ -159,10 +159,10 @@ public class Sprite{
     }
     
     public int getWidth(){
-        return frames[0].getRegionWidth();
+        return ((TextureRegion)frames[0]).getRegionWidth();
     }
     
     public int getHeight(){
-        return frames[0].getRegionHeight();
+        return ((TextureRegion)frames[0]).getRegionHeight();
     }
 }

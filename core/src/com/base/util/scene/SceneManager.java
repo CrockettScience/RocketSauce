@@ -22,6 +22,7 @@ public class SceneManager{
         
         scene = aScene;
         scene.loadResources();
+        scene.sceneMain();
     }
     
     public static void setView(View aView) {
