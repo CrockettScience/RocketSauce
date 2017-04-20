@@ -26,6 +26,7 @@ import com.assets.components.group.ComButton;
 import com.assets.components.group.ComTextField;
 import com.assets.systems.group.SysButton;
 import com.assets.systems.group.SysTextField;
+import com.engine.EngineBase;
 import javafx.scene.control.MenuButton;
 
 /**
@@ -40,9 +41,9 @@ public class ScnMain extends Scene {
         //Load Textures
         TextureAtlasManager.createAtlas("RocketSauce");
         
-        TextureAtlasManager.addRegion("RocketSauce", "button", new TextureRegion(new Texture(Gdx.files.internal("ui_button.png")), 384, 32));
-        TextureAtlasManager.addRegion("RocketSauce", "back", new TextureRegion(new Texture(Gdx.files.internal("bg_triangles.png"))));
-        TextureAtlasManager.addRegion("RocketSauce", "inputbox", new TextureRegion(new Texture(Gdx.files.internal("ui_inputbox.png"))));
+        TextureAtlasManager.addRegion("RocketSauce", "button", new TextureRegion(new Texture(Gdx.files.internal("img\\main\\ui_button.png")), 384, 32));
+        TextureAtlasManager.addRegion("RocketSauce", "back", new TextureRegion(new Texture(Gdx.files.internal("img\\main\\bg_triangles.png"))));
+        TextureAtlasManager.addRegion("RocketSauce", "inputbox", new TextureRegion(new Texture(Gdx.files.internal("img\\main\\ui_inputbox.png"))));
         
         //load font
         menuFont = Tools.makeBitmapFont("font\\MenuFont.ttf", 28, Color.WHITE);

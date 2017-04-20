@@ -16,6 +16,7 @@
  */
 package com.global;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -32,36 +33,33 @@ public class TextureAtlasManager {
     public static TextureRegion getRegion(String atlas, String name){
         if(atlasMap.containsKey(atlas)){
             TextureAtlas.AtlasRegion reg = atlasMap.get(atlas).findRegion(name);
-            if(reg != null && reg.rotate){
-                float temp = reg.getV2();
-                reg.setV2(reg.getV());
-                reg.setV(temp);
+            if(reg != null){
+                if(reg.rotate) {
+                    float temp = reg.getV2();
+                    reg.setV2(reg.getV());
+                    reg.setV(temp);
+                }
+                return reg;
             }
-            return reg;
         }
         
-        return null;
+        return new TextureRegion(new Texture(Gdx.files.internal("img\\Blank.png")));
     }
     
-    /**
-     *
-     * @param atlas
-     * @param name
-     * @param idx
-     * @return
-     */
     public static TextureRegion getRegion(String atlas, String name, int idx){
         if(atlasMap.containsKey(atlas)){
             TextureAtlas.AtlasRegion reg = atlasMap.get(atlas).findRegion(name, idx);
-            if(reg != null && reg.rotate){
-                float temp = reg.getV2();
-                reg.setV2(reg.getV());
-                reg.setV(temp);
+            if(reg != null) {
+                if(reg.rotate) {
+                    float temp = reg.getV2();
+                    reg.setV2(reg.getV());
+                    reg.setV(temp);
+                }
+                return reg;
             }
-            return reg;
         }
         
-        return null;
+        return new TextureRegion(new Texture(Gdx.files.internal("img\\Blank.png")));
         
     }
     

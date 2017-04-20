@@ -84,8 +84,10 @@ public class EngineBase {
     }
     
     public static void resizeFrameBuffer(int width, int height){
-        fbo.dispose();
-        fbo = new FrameBuffer(Pixmap.Format.RGBA8888, width, height, false);
+        if(width > 0 && height > 0) {
+            fbo.dispose();
+            fbo = new FrameBuffer(Pixmap.Format.RGBA8888, width, height, false);
+        }
     }
 
     public static FrameBuffer getFbo() {
