@@ -2,7 +2,7 @@
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import java.nio.file.*;
-import com.base.util.Ini;
+import com.util.Ini;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics;
 
 public class Initialize{

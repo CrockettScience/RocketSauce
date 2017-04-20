@@ -2,7 +2,7 @@
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import com.base.engine.EngineApplication;
+import com.engine.EngineApplication;
 
 public class DesktopLauncher {
     
