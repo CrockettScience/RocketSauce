@@ -1,7 +1,7 @@
 package com.assets.scripts;
 
 import com.badlogic.gdx.Gdx;
-import com.assets.util.script.Script;
+import com.util.input.Script;
 
 /**
  *

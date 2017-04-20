@@ -12,9 +12,9 @@ import com.assets.components.general.ComBbox;
 import com.assets.components.general.ComLabel;
 import com.assets.components.general.ComPosition;
 import com.assets.components.general.ComSprite;
-import com.assets.util.EngineSystem;
+import com.util.input.EngineSystem;
 import com.global.ComponentMap;
-import com.util.input.TextInputProcessor;
+import com.util.input.processors.TextInputProcessor;
 import com.util.Tools;
 
 /**

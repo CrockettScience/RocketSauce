@@ -10,7 +10,7 @@ import java.util.HashMap;
  *
  * @author Jonathan Crockett
  */
-public class TextureAtlasManager {
+public class TextureManager {
     
     private static HashMap<String, TextureAtlas> atlasMap = new HashMap<String, TextureAtlas>();
     

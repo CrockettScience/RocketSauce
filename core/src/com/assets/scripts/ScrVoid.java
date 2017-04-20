@@ -1,6 +1,6 @@
 package com.assets.scripts;
 
-import com.assets.util.script.Script;
+import com.util.input.Script;
 
 /**
  *

@@ -1,4 +1,4 @@
-package com.util.input;
+package com.util.input.processors;
 
 import com.util.input.processors.AbstractInputProcessor;
 import com.badlogic.gdx.Input;

@@ -8,7 +8,7 @@ import com.util.Ini;
 import com.badlogic.gdx.graphics.GL20;
 import com.assets.attributes.AttBckColor;
 import com.global.Preferences;
-import com.global.TextureAtlasManager;
+import com.global.TextureManager;
 import com.assets.scenes.ScnMain;
 
 /**
@@ -54,6 +54,6 @@ public class EngineApplication extends ApplicationAdapter{
         }
 	
 	public void dispose(){
-            TextureAtlasManager.clear();
+            TextureManager.clear();
 	}
 }

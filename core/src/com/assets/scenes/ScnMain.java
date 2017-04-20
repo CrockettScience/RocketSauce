@@ -13,9 +13,9 @@ import com.assets.components.general.ComLabel;
 import com.assets.components.general.ComPosition;
 import com.assets.components.general.ComSprite;
 import com.assets.scripts.ScrQuit;
-import com.assets.util.EngineSystem;
-import com.assets.util.script.Script;
-import com.global.TextureAtlasManager;
+import com.util.input.EngineSystem;
+import com.util.input.Script;
+import com.global.TextureManager;
 import com.util.Tools;
 import com.util.graphics.Parallax;
 import com.util.graphics.Sprite;
@@ -35,11 +35,11 @@ public class ScnMain extends Scene {
     @Override
     protected void loadResources() {
         //Load Textures
-        TextureAtlasManager.createAtlas("RocketSauce");
+        TextureManager.createAtlas("RocketSauce");
         
-        TextureAtlasManager.addRegion("RocketSauce", "button", new TextureRegion(new Texture(Gdx.files.internal("img\\main\\ui_button.png")), 384, 32));
-        TextureAtlasManager.addRegion("RocketSauce", "back", new TextureRegion(new Texture(Gdx.files.internal("img\\main\\bg_triangles.png"))));
-        TextureAtlasManager.addRegion("RocketSauce", "inputbox", new TextureRegion(new Texture(Gdx.files.internal("img\\main\\ui_inputbox.png"))));
+        TextureManager.addRegion("RocketSauce", "button", new TextureRegion(new Texture(Gdx.files.internal("img\\main\\ui_button.png")), 384, 32));
+        TextureManager.addRegion("RocketSauce", "back", new TextureRegion(new Texture(Gdx.files.internal("img\\main\\bg_triangles.png"))));
+        TextureManager.addRegion("RocketSauce", "inputbox", new TextureRegion(new Texture(Gdx.files.internal("img\\main\\ui_inputbox.png"))));
         
         //load font
         menuFont = Tools.makeBitmapFont("font\\MenuFont.ttf", 28, Color.WHITE);
@@ -50,7 +50,7 @@ public class ScnMain extends Scene {
         
         //load scene attributes
         AttParallax parallax = new AttParallax();
-        parallax.background_0 = new Parallax(TextureAtlasManager.getRegion("RocketSauce", "back"), 10, 0);
+        parallax.background_0 = new Parallax(TextureManager.getRegion("RocketSauce", "back"), 10, 0);
         addAttribute(parallax);
         
         putEntity("hey", button("Goodbye World", Gdx.graphics.getWidth() * 0.5f, Gdx.graphics.getHeight() * 0.25f, new ScrQuit()));
@@ -62,7 +62,7 @@ public class ScnMain extends Scene {
     protected void destroyResources() {
         removeAttribute(AttParallax.class);
         
-        TextureAtlasManager.disposeAtlas("RocketSauce");
+        TextureManager.disposeAtlas("RocketSauce");
         
         menuFont.dispose();
         
@@ -86,7 +86,7 @@ public class ScnMain extends Scene {
             pos.setY(y);
 
             ComSprite spr = new ComSprite();
-            spr.setSprite(new Sprite(TextureAtlasManager.getRegion("RocketSauce", "button"), 1, 2, 2, 10, true, true));
+            spr.setSprite(new Sprite(TextureManager.getRegion("RocketSauce", "button"), 1, 2, 2, 10, true, true));
             spr.setOffsetX(spr.getSprite().getWidth() / 2);
 
             ComBbox bbox = new ComBbox();
@@ -118,7 +118,7 @@ public class ScnMain extends Scene {
             pos.setY(y);
             
             ComSprite spr = new ComSprite();
-            spr.setSprite(new Sprite(TextureAtlasManager.getRegion("RocketSauce", "inputbox"), 1, 2, 2, 1, true, true));
+            spr.setSprite(new Sprite(TextureManager.getRegion("RocketSauce", "inputbox"), 1, 2, 2, 1, true, true));
             spr.setOffsetX(spr.getSprite().getWidth() / 2);
             
             ComBbox bbox = new ComBbox();

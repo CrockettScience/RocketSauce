@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.assets.components.group.ComActor;
-import com.assets.util.EngineSystem;
+import com.util.input.EngineSystem;
 import com.global.ComponentMap;
 
 /**

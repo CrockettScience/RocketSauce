@@ -23,7 +23,7 @@ import com.util.scene.SceneManager;
 import com.util.Tools;
 import com.util.scene.View;
 import java.util.Comparator;
-import com.assets.util.EngineSystem;
+import com.util.input.EngineSystem;
 
 /**
  *
@@ -218,12 +218,7 @@ public class EngineBase {
             super(Family.all(ComPosition.class, ComSprite.class).get(), new ZComparator());
             batch = b;
         }
-
-        /**
-         *
-         * @param ent
-         * @param deltaTime
-         */
+        
         public void processEntity(Entity ent, float deltaTime){
             View v = SceneManager.getView();
 
@@ -282,10 +277,6 @@ public class EngineBase {
     public static class PostDraw extends EntitySystem {
         SpriteBatch batch;
         
-        /**
-         *
-         * @param b
-         */
         public PostDraw(SpriteBatch b) {
             batch = b;
         }

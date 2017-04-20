@@ -1,4 +1,4 @@
-package com.assets.util.script;
+package com.util.input;
 
 /**
  *
