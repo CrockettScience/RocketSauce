@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 import java.util.HashMap;
 
 /**
@@ -11,6 +12,7 @@ import java.util.HashMap;
  * @author Jonathan Crockett
  */
 public class TextureManager {
+    public static final String IMAGE_ROOT = "img\\";
     
     private static HashMap<String, TextureAtlas> atlasMap = new HashMap<String, TextureAtlas>();
     
@@ -26,8 +28,8 @@ public class TextureManager {
                 return reg;
             }
         }
-        
-        return new TextureRegion(new Texture(Gdx.files.internal("img\\Blank.png")));
+        System.out.println("TextureManager: Unable to load texture in atlas '" + atlas + "' called '" + name + "'");
+        return new TextureRegion(new Texture(Gdx.files.internal("engine\\img_missing.png")));
     }
     
     public static TextureRegion getRegion(String atlas, String name, int idx){
@@ -43,21 +45,51 @@ public class TextureManager {
             }
         }
         
-        return new TextureRegion(new Texture(Gdx.files.internal("img\\Blank.png")));
+        System.out.println("TextureManager: Unable to load texture in atlas '" + atlas + "' called '" + name + "'");
+        return new TextureRegion(new Texture(Gdx.files.internal("engine\\img_missing.png")));
         
     }
     
-    public static boolean addRegion(String atlas, String name, TextureRegion tex){
+    public static boolean addRegion(String atlas, String name, String path){
         if(atlasMap.containsKey(atlas)){
-            atlasMap.get(atlas).addRegion(name, tex);
+            try{
+                atlasMap.get(atlas).addRegion(name, new TextureRegion(new Texture(Gdx.files.internal(IMAGE_ROOT + path))));
+            }
+            catch(GdxRuntimeException e){
+                System.out.println("TextureManager: Unable to find image " + path);
+                return false;
+            }
+            return true;
         }
         
         return false;
     }
     
-    public static boolean addRegion(String atlas, String name, Texture tex, int x, int y, int width, int height){
+    public static boolean addRegion(String atlas, String name, String path, int width, int height){
         if(atlasMap.containsKey(atlas)){
-            atlasMap.get(atlas).addRegion(name, tex, x, y, width, height);
+            try{
+                atlasMap.get(atlas).addRegion(name, new TextureRegion(new Texture(Gdx.files.internal(IMAGE_ROOT + path)), width, height));
+            }
+            catch(GdxRuntimeException e){
+                System.out.println("TextureManager: Unable to find image " + path);
+                return false;
+            }
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public static boolean addRegion(String atlas, String name, String path, int x, int y, int width, int height){
+        if(atlasMap.containsKey(atlas)){
+            try{
+                atlasMap.get(atlas).addRegion(name, new Texture(Gdx.files.internal(IMAGE_ROOT + path)), x, y, width, height);
+            }
+            catch(GdxRuntimeException e){
+                System.out.println("TextureManager: Unable to find image " + path);
+                return false;
+            }
+            return true;
         }
         
         return false;
@@ -68,7 +100,7 @@ public class TextureManager {
             atlasMap.put(atlas, new TextureAtlas());
             return true;
         }
-        
+        System.out.println("TextureManager: Could not create atlas; atlas " + atlas + " already exists.");
         return false;
     }
     
@@ -78,7 +110,7 @@ public class TextureManager {
             atlasMap.remove(atlas);
             return true;
         }
-        
+        System.out.println("TextureManager: Could not dispose atlas; atlas " + atlas + " does not exist.");
         return false;
     }
     

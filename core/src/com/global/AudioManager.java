@@ -13,6 +13,9 @@ import java.util.function.BiConsumer;
  * @author Jonathan Crockett
  */
 public class AudioManager {
+    public static final String MUSIC_ROOT = "audio\\music\\";
+    public static final String SOUND_ROOT = "audio\\sound\\";
+    
     private static HashMap<String, Music> musicMap = new HashMap<String, Music>();
     private static HashMap<String, Sound> soundMap = new HashMap<String, Sound>();
     
@@ -20,18 +23,19 @@ public class AudioManager {
     private static float loopPosition = 0;
     private static boolean isLooping = false;
     
-    private static float musicVolume = 0.5f;
-    private static float soundVolume = 0.5f;
+    private static float musicVolume = 1;
+    private static float soundVolume = 1;
     private static float masterVolume = 1;
     
     public static boolean addMusic(String name, String path){
         try{
-            Music msc = Gdx.audio.newMusic(Gdx.files.internal(path));
+            Music msc = Gdx.audio.newMusic(Gdx.files.internal(MUSIC_ROOT + path));
             msc.setOnCompletionListener(new LoopingPosition());
             msc.setVolume(getActualMusicVolume());
             musicMap.put(name, msc);
         }
         catch(GdxRuntimeException e){
+            System.out.println("AudioManager: Unable to load music file " + path);
             return false;
         }
         
@@ -40,10 +44,11 @@ public class AudioManager {
     
     public static boolean addSound(String name, String path){
         try{
-            Sound snd = Gdx.audio.newSound(Gdx.files.internal(path));
+            Sound snd = Gdx.audio.newSound(Gdx.files.internal(SOUND_ROOT + path));
             soundMap.put(name, snd);
         }
         catch(GdxRuntimeException e){
+            System.out.println("AudioManager: Unable to load sound file " + path);
             return false;
         }
         
@@ -58,6 +63,8 @@ public class AudioManager {
             musicMap.remove(name).dispose();
             return true;
         }
+        
+        System.out.println("AudioManager: Cannot dispose; Music entry by the name of " + name + " could not be found.");
         return false;
     }
     
@@ -89,10 +96,13 @@ public class AudioManager {
         loadedMusic = null;
     }
     
-    public static void playMusic(){
+    public static boolean playMusic(){
         if(loadedMusic != null){
             loadedMusic.play();
+            return true;
         }
+        System.out.println("AudioManager: Cannot play; no music is currently loaded.");
+        return false;
     }
     
     public static boolean playMusic(String name){
@@ -104,13 +114,16 @@ public class AudioManager {
             musicMap.get(name).play();
             return true;
         }
+        System.out.println("AudioManager: Cannot play; music entry by the name of " + name + " could not be found.");
         return false;
     }
     
     public static boolean pauseMusic(){
         if(loadedMusic.isPlaying()){
             loadedMusic.pause();
+            return true;
         }
+        System.out.println("AudioManager: Cannot pause; no music is currently loaded.");
         return false;
     }
     
@@ -119,14 +132,12 @@ public class AudioManager {
             loadedMusic.stop();
             return true;
         }
+        System.out.println("AudioManager: Cannot stop; no music is currently loaded.");
         return false;
     }
     
     public static boolean isMusicPlaying(String name){
-        if(musicMap.containsKey(name)) {
-            return musicMap.get(name).isPlaying();
-        }
-        return false;
+        return musicMap.containsKey(name) ? musicMap.get(name).isPlaying() : false;
     }
     
     public static boolean isLoadedMusicPlaying() {
@@ -147,6 +158,7 @@ public class AudioManager {
             soundMap.get(name).play(getActualSoundVolume());
             return true;
         }
+        System.out.println("AudioManager: Cannot play: sound entry by the name of " + name + " could not be found.");
         return false;
     }
     
@@ -155,6 +167,7 @@ public class AudioManager {
             soundMap.get(name).loop(getActualSoundVolume());
             return true;
         }
+        System.out.println("AudioManager: Cannot play loop: sound entry by the name of " + name + " could not be found.");
         return false;
     }
     
@@ -163,6 +176,7 @@ public class AudioManager {
             soundMap.get(name).pause();
             return true;
         }
+        System.out.println("AudioManager: Cannot pause: sound entry by the name of " + name + " could not be found.");
         return false;
     }
     
@@ -171,6 +185,7 @@ public class AudioManager {
             soundMap.get(name).resume();
             return true;
         }
+        System.out.println("AudioManager: Cannot resume: sound entry by the name of " + name + " could not be found.");
         return false;
     }
     
@@ -179,6 +194,7 @@ public class AudioManager {
             soundMap.get(name).stop();
             return true;
         }
+        System.out.println("AudioManager: Cannot stop: sound entry by the name of " + name + " could not be found.");
         return false;
     }
     

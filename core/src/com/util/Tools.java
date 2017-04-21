@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.assets.components.general.ComPosition;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.util.scene.SceneManager;
 
 /**
@@ -48,17 +49,33 @@ public class Tools{
     
     //Misc    
     public static BitmapFont makeBitmapFont(String fontPath, int size, Color color){
-        
-        FreeTypeFontGenerator gen = new FreeTypeFontGenerator(Gdx.files.internal(fontPath));
-        FreeTypeFontParameter par = new FreeTypeFontParameter();
-        
-        par.size = size;
-        par.color = color;
-        
-        BitmapFont font = gen.generateFont(par);
-        
-        gen.dispose();
-        return font;
+        FreeTypeFontGenerator gen;
+                
+        try{
+            gen = new FreeTypeFontGenerator(Gdx.files.internal("fonts\\" + fontPath));
+            FreeTypeFontParameter par = new FreeTypeFontParameter();
+
+            par.size = size;
+            par.color = color;
+
+            BitmapFont font = gen.generateFont(par);
+
+            gen.dispose();
+            return font;
+        }
+        catch(GdxRuntimeException e) {
+            System.out.println("FreeTypeFontGenerator: Could not load font " + fontPath);
+            gen = new FreeTypeFontGenerator(Gdx.files.internal("engine\\fnt_missing"));
+            FreeTypeFontParameter par = new FreeTypeFontParameter();
+
+            par.size = size;
+            par.color = color;
+
+            BitmapFont font = gen.generateFont(par);
+
+            gen.dispose();
+            return font;
+        }
     }
     
     public static float getMouseX(){

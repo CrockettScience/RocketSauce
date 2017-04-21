@@ -18,7 +18,7 @@ public class ComSprite implements Component{
     private float scaleY = 1;
     
     public ComSprite(){
-        Texture tex = new Texture("img\\Blank.png");
+        Texture tex = new Texture("engine\\img_missing.png");
         TextureRegion reg = new TextureRegion();
         reg.setTexture(tex);
         sprite = new Sprite(reg);

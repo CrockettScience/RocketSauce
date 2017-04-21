@@ -24,6 +24,7 @@ import com.assets.components.group.ComButton;
 import com.assets.components.group.ComTextField;
 import com.assets.systems.group.SysButton;
 import com.assets.systems.group.SysTextField;
+import com.global.AudioManager;
 
 /**
  *
@@ -34,15 +35,19 @@ public class ScnMain extends Scene {
     
     @Override
     protected void loadResources() {
-        //Load Textures
+        //Load textures
         TextureManager.createAtlas("RocketSauce");
         
-        TextureManager.addRegion("RocketSauce", "button", new TextureRegion(new Texture(Gdx.files.internal("img\\main\\ui_button.png")), 384, 32));
-        TextureManager.addRegion("RocketSauce", "back", new TextureRegion(new Texture(Gdx.files.internal("img\\main\\bg_triangles.png"))));
-        TextureManager.addRegion("RocketSauce", "inputbox", new TextureRegion(new Texture(Gdx.files.internal("img\\main\\ui_inputbox.png"))));
+        TextureManager.addRegion("RocketSauce", "button", "main\\ui_button.png", 384, 32);
+        TextureManager.addRegion("RocketSauce", "back", "main\\bg_triangles.png");
+        TextureManager.addRegion("RocketSauce", "inputbox", "main\\ui_inputbox.png");
+        
+        //load audio
+        AudioManager.addMusic("carefree", "msc_carefree.mp3");
+        AudioManager.addSound("select", "snd_select.wav");
         
         //load font
-        menuFont = Tools.makeBitmapFont("font\\MenuFont.ttf", 28, Color.WHITE);
+        menuFont = Tools.makeBitmapFont("fnt_main.ttf", 28, Color.WHITE);
         
         //load systems
         EngineSystem.addToEngine(new SysButton());
@@ -76,6 +81,7 @@ public class ScnMain extends Scene {
     protected void sceneMain() {
         activateEntity("hey");
         activateEntity("type");
+        AudioManager.playMusic("carefree");
     }
     
     private Entity button(String bLabel, float x, float y, Script script) {
