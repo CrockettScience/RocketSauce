@@ -17,19 +17,11 @@ public class ComActor implements Component {
     private ComSprite spr = new ComSprite();
     private ComBbox bbox = new ComBbox();
     
-    private ComActor(ComPosition pos, ComVelocity vel, ComSprite spr, ComBbox bbox){
-        if(pos != null){
-            this.pos = pos;
-        }
-        if(vel != null){
-            this.vel = vel;
-        }
-        if(spr != null){
-            this.spr = spr;
-        }
-        if(bbox != null){
-            this.bbox = bbox;
-        }
+    private ComActor(ComPosition cPos, ComVelocity cVel, ComSprite cSpr, ComBbox cBbox){
+        pos = cPos == null ? pos : cPos;
+        vel = cVel == null ? vel : cVel;
+        spr = cSpr == null ? spr : cSpr;
+        bbox = cBbox == null ? bbox : cBbox;
     }
     
     public static void buildActor(Entity ent, ComPosition pos, ComVelocity vel, ComSprite spr, ComBbox bbox){

@@ -23,20 +23,28 @@ public class SysButton extends EngineSystem {
         entities = engine.getEntitiesFor(Family.all(ComButton.class).get());
     }
     
-    public void update(float deltaTime){
+    public void update(float deltaTime) {
         if(Preferences.prefs.read("CONTROLS", "ControllerID", "Mouse & Keyboard").equals("Mouse & Keyboard")){
             for(Entity ent: entities){
                 ComButton btn = ComponentMap.BUTTON.get(ent);
 
                 if(Tools.pointInBBox(Tools.getMouseX(), Tools.getMouseY(), btn.getBbox())){
                     btn.getSpr().getSprite().setAnimationIndex(1);
+                    if(!btn.isHighlighted()){
+                        btn.getSound().play("highlight");
+                        btn.setHighlighted(true);
+                    }
 
                     if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
                         btn.getFunct().executeFunction();
+                        btn.getSound().play("select");
                     }
 
-                }else{
+                }
+                
+                else{
                     btn.getSpr().getSprite().setAnimationIndex(0);
+                    btn.setHighlighted(false);
                 }
             }
         }

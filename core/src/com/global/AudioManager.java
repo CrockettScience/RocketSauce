@@ -189,7 +189,7 @@ public class AudioManager {
         return false;
     }
     
-    public static boolean stop(String name){
+    public static boolean stopSound(String name){
         if(soundMap.containsKey(name)){
             soundMap.get(name).stop();
             return true;

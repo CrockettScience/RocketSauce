@@ -2,7 +2,6 @@ package com.global;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.assets.components.group.ComActor;
 import com.assets.components.general.ComBbox;
-import com.assets.components.general.ComChunk;
 import com.assets.components.general.ComFunction;
 import com.assets.components.general.ComLabel;
 import com.assets.components.general.ComPosition;
@@ -18,7 +17,6 @@ import com.assets.components.group.ComTextField;
  */
 public class ComponentMap{
     
-    public static final ComponentMapper<ComChunk> CHUNKCOORD = ComponentMapper.getFor(ComChunk.class);
     public static final ComponentMapper<ComButton> BUTTON = ComponentMapper.getFor(ComButton.class);
     public static final ComponentMapper<ComTextField> INPUTBOX = ComponentMapper.getFor(ComTextField.class);
     public static final ComponentMapper<ComTimer> TIMER = ComponentMapper.getFor(ComTimer.class);

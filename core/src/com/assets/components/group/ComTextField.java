@@ -21,19 +21,11 @@ public class ComTextField implements Component{
     private boolean focus = false;
     private int maxSize;
 
-    private ComTextField(ComSprite spr, ComPosition pos, ComLabel label, ComBbox bbox){
-        if(spr != null){
-            this.spr = spr;
-        }
-        if(label != null){
-            this.label = label;
-        }
-        if(bbox != null){
-            this.bbox = bbox;
-        }
-        if(pos != null){
-            this.pos = pos;
-        }
+    private ComTextField(ComSprite cSpr, ComPosition cPos, ComLabel cLabel, ComBbox cBbox){
+        pos = cPos == null ? pos : cPos;
+        label = cLabel == null ? label : cLabel;
+        spr = cSpr == null ? spr : cSpr;
+        bbox = cBbox == null ? bbox : cBbox;
     }
     
     public static void buildInputBox(Entity ent, ComSprite spr, ComPosition pos, ComLabel label, ComBbox bbox, int maxSize){

@@ -37,37 +37,49 @@ public abstract class Scene{
         isInEngine.put(key, false);
     }
     
-    public void activateEntity(String key){
+    public boolean activateEntity(String key){
         if(entities.containsKey(key)){
             if(!isInEngine.get(key)){
                 EngineBase.addEntity(entities.get(key));
                 isInEngine.replace(key, true);
             }
+            return true;
         }
+        System.out.println("Scene: Cannot activate entity; entity '" + key + "' could not be found");
+        return false;
     }
     
-    /**
-     *
-     * @param key
-     */
-    public void disableEntity(String key){
+    public boolean disableEntity(String key){
         if(entities.containsKey(key)){
             if(isInEngine.get(key)){
                 EngineBase.removeEntity(entities.get(key));
                 isInEngine.replace(key, false);
             }
+            return true;
         }
+        System.out.println("Scene: Cannot disable entity; entity '" + key + "' could not be found");
+        return false;
     }
 
-    public void removeEntity(String key){
+    public boolean removeEntity(String key){
         if(entities.containsKey(key)){
             entities.remove(key);
             isInEngine.remove(key);
+            return true;
         }
+        System.out.println("Scene: Cannot remove entity; entity '" + key + "' could not be found");
+        return false;
     }
     
     public Entity getEntity(String key){
-        return entities.get(key);
+        Entity ent = entities.get(key);
+        
+        if(ent == null) {
+            System.out.println("Scene: Cannot get entity; entity '" + key + "' could not be found");
+            ent = new Entity();
+        }
+        
+        return ent;
     }
     
     public void disableEntities(){
