@@ -13,7 +13,7 @@ import com.assets.components.general.ComSound;
 import com.assets.components.general.ComSprite;
 import com.assets.scripts.ScrQuit;
 import com.util.input.EngineSystem;
-import com.util.input.Script;
+import com.util.script.Script;
 import com.global.TextureManager;
 import com.util.Tools;
 import com.util.graphics.Parallax;

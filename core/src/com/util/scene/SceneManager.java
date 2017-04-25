@@ -9,7 +9,7 @@ public class SceneManager{
     private static Scene scene;
     private static View view;
 
-    public static Scene getScene() {
+    public static Scene getCurrentScene() {
         return scene;
     }
     

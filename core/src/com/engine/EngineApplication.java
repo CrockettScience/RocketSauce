@@ -1,6 +1,5 @@
 package com.engine;
 
-
 import com.util.scene.SceneManager;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -15,7 +14,7 @@ import com.assets.scenes.ScnMain;
  *
  * @author Jonathan Crockett
  */
-public class EngineApplication extends ApplicationAdapter{
+public class EngineApplication extends ApplicationAdapter {
 	
         public EngineApplication(Ini ini){
             super();
@@ -33,7 +32,7 @@ public class EngineApplication extends ApplicationAdapter{
         
 	public void render (){
             SceneManager.getView().getViewport().getCamera().update();
-            AttBckColor c = SceneManager.getScene().getAttribute(AttBckColor.class);
+            AttBckColor c = SceneManager.getCurrentScene().getAttribute(AttBckColor.class);
             
             if(c == null){
                 c = new AttBckColor();

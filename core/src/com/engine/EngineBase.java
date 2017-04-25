@@ -140,8 +140,8 @@ public class EngineBase {
                     view.setY(pos.getY() - (view.getHeight() - view.getYBufferZone()));
                 }
             }
-            if(SceneManager.getScene().containsAttribute(AttBoundary.class)){
-                AttBoundary bound = SceneManager.getScene().getAttribute(AttBoundary.class);
+            if(SceneManager.getCurrentScene().containsAttribute(AttBoundary.class)){
+                AttBoundary bound = SceneManager.getCurrentScene().getAttribute(AttBoundary.class);
 
                 if(view.getX() < 0){
                     view.setX(0);
@@ -169,39 +169,39 @@ public class EngineBase {
         }
 
         private void backgroundUpdate() {
-            if(SceneManager.getScene().containsAttribute(AttParallax.class)){
+            if(SceneManager.getCurrentScene().containsAttribute(AttParallax.class)){
                 fbo.bind();
                 batch.begin();
 
-                if(SceneManager.getScene().getAttribute(AttParallax.class).background_0 != null){
-                    SceneManager.getScene().getAttribute(AttParallax.class).background_0.updateTexture(batch);
+                if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_0 != null){
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_0.updateTexture(batch);
                 }
-                if(SceneManager.getScene().getAttribute(AttParallax.class).background_1 != null){
-                    SceneManager.getScene().getAttribute(AttParallax.class).background_1.updateTexture(batch);
+                if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_1 != null){
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_1.updateTexture(batch);
                 }
-                if(SceneManager.getScene().getAttribute(AttParallax.class).background_2 != null){
-                    SceneManager.getScene().getAttribute(AttParallax.class).background_2.updateTexture(batch);
+                if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_2 != null){
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_2.updateTexture(batch);
                 }
-                if(SceneManager.getScene().getAttribute(AttParallax.class).background_3 != null){
-                    SceneManager.getScene().getAttribute(AttParallax.class).background_3.updateTexture(batch);
+                if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_3 != null){
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_3.updateTexture(batch);
                 }
-                if(SceneManager.getScene().getAttribute(AttParallax.class).background_4 != null){
-                    SceneManager.getScene().getAttribute(AttParallax.class).background_4.updateTexture(batch);
+                if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_4 != null){
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_4.updateTexture(batch);
                 }
-                if(SceneManager.getScene().getAttribute(AttParallax.class).background_5 != null){
-                    SceneManager.getScene().getAttribute(AttParallax.class).background_5.updateTexture(batch);
+                if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_5 != null){
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_5.updateTexture(batch);
                 }
-                if(SceneManager.getScene().getAttribute(AttParallax.class).background_6 != null){
-                    SceneManager.getScene().getAttribute(AttParallax.class).background_6.updateTexture(batch);
+                if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_6 != null){
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_6.updateTexture(batch);
                 }
-                if(SceneManager.getScene().getAttribute(AttParallax.class).background_7 != null){
-                    SceneManager.getScene().getAttribute(AttParallax.class).background_7.updateTexture(batch);
+                if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_7 != null){
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_7.updateTexture(batch);
                 }
-                if(SceneManager.getScene().getAttribute(AttParallax.class).background_8 != null){
-                    SceneManager.getScene().getAttribute(AttParallax.class).background_8.updateTexture(batch);
+                if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_8 != null){
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_8.updateTexture(batch);
                 }
-                if(SceneManager.getScene().getAttribute(AttParallax.class).background_9 != null){
-                    SceneManager.getScene().getAttribute(AttParallax.class).background_9.updateTexture(batch);
+                if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_9 != null){
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_9.updateTexture(batch);
                 }
 
                 batch.end();
@@ -288,38 +288,38 @@ public class EngineBase {
         }
         
         private void foregroundUpdate() {
-            if(SceneManager.getScene().containsAttribute(AttParallax.class)){
+            if(SceneManager.getCurrentScene().containsAttribute(AttParallax.class)){
                 fbo.bind();
                 batch.begin();
-                if(SceneManager.getScene().getAttribute(AttParallax.class).foreground_0 != null){
-                    SceneManager.getScene().getAttribute(AttParallax.class).foreground_0.updateTexture(batch);
+                if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_0 != null){
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_0.updateTexture(batch);
                 }
-                if(SceneManager.getScene().getAttribute(AttParallax.class).foreground_1 != null){
-                    SceneManager.getScene().getAttribute(AttParallax.class).foreground_1.updateTexture(batch);
+                if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_1 != null){
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_1.updateTexture(batch);
                 }
-                if(SceneManager.getScene().getAttribute(AttParallax.class).foreground_2 != null){
-                    SceneManager.getScene().getAttribute(AttParallax.class).foreground_2.updateTexture(batch);
+                if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_2 != null){
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_2.updateTexture(batch);
                 }
-                if(SceneManager.getScene().getAttribute(AttParallax.class).foreground_3 != null){
-                    SceneManager.getScene().getAttribute(AttParallax.class).foreground_3.updateTexture(batch);
+                if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_3 != null){
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_3.updateTexture(batch);
                 }
-                if(SceneManager.getScene().getAttribute(AttParallax.class).foreground_4 != null){
-                    SceneManager.getScene().getAttribute(AttParallax.class).foreground_4.updateTexture(batch);
+                if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_4 != null){
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_4.updateTexture(batch);
                 }
-                if(SceneManager.getScene().getAttribute(AttParallax.class).foreground_5 != null){
-                    SceneManager.getScene().getAttribute(AttParallax.class).foreground_5.updateTexture(batch);
+                if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_5 != null){
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_5.updateTexture(batch);
                 }
-                if(SceneManager.getScene().getAttribute(AttParallax.class).foreground_6 != null){
-                    SceneManager.getScene().getAttribute(AttParallax.class).foreground_6.updateTexture(batch);
+                if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_6 != null){
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_6.updateTexture(batch);
                 }
-                if(SceneManager.getScene().getAttribute(AttParallax.class).foreground_7 != null){
-                    SceneManager.getScene().getAttribute(AttParallax.class).foreground_7.updateTexture(batch);
+                if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_7 != null){
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_7.updateTexture(batch);
                 }
-                if(SceneManager.getScene().getAttribute(AttParallax.class).foreground_8 != null){
-                    SceneManager.getScene().getAttribute(AttParallax.class).foreground_8.updateTexture(batch);
+                if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_8 != null){
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_8.updateTexture(batch);
                 }
-                if(SceneManager.getScene().getAttribute(AttParallax.class).foreground_9 != null){
-                    SceneManager.getScene().getAttribute(AttParallax.class).foreground_9.updateTexture(batch);
+                if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_9 != null){
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_9.updateTexture(batch);
                 }
                 batch.end();
                 fbo.unbind();

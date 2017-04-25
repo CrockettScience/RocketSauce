@@ -1,7 +1,8 @@
 package com.assets.scripts;
 
 import com.global.AudioManager;
-import com.util.input.Script;
+import com.util.script.Script;
+import com.util.script.ScriptReturn;
 
 /**
  *
@@ -17,7 +18,7 @@ public class ScrVolume extends Script {
     }
     
     @Override
-    protected void scriptMain() {
+    protected ScriptReturn scriptMain() {
         switch(vType) {
             case SOUND:
                 AudioManager.setSoundVolume(AudioManager.getSoundVolume() + vLevel);
@@ -31,6 +32,7 @@ public class ScrVolume extends Script {
                 AudioManager.setMasterVolume(AudioManager.getMasterVolume() + vLevel);
                 break;
         }
+        return null;
     }
 
     @Override

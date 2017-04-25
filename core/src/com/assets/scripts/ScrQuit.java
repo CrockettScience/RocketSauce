@@ -1,7 +1,8 @@
 package com.assets.scripts;
 
 import com.badlogic.gdx.Gdx;
-import com.util.input.Script;
+import com.util.script.Script;
+import com.util.script.ScriptReturn;
 
 /**
  *
@@ -10,8 +11,9 @@ import com.util.input.Script;
 public class ScrQuit extends Script{
     
     @Override
-    public void scriptMain(){
+    public ScriptReturn scriptMain(){
         Gdx.app.exit();
+        return null;
     }
 
     @Override

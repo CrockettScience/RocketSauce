@@ -1,6 +1,6 @@
 package com.assets.components.general;
 import com.badlogic.ashley.core.Component;
-import com.util.input.Script;
+import com.util.script.Script;
 
 /**
  *
