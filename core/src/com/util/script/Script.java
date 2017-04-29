@@ -4,16 +4,16 @@ package com.util.script;
  *
  * @author Jonathan Crockett
  */
-public abstract class Script<Return extends ScriptReturn>{
+public abstract class Script<ArgumentType extends Argument, ReturnType extends Return>{
     
     
     protected String scriptLog = "";
     
-    protected abstract Return scriptMain();
+    protected abstract ReturnType scriptMain(ArgumentType args);
     
-    public final Return execute(){
+    public final ReturnType execute(ArgumentType args){
         try{
-            return scriptMain();
+            return scriptMain(args);
         }
         catch(Throwable e){
             System.out.println("Could not execute script '" + this + "'");

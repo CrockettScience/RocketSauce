@@ -2,9 +2,11 @@ package com.global;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.assets.components.group.ComActor;
 import com.assets.components.general.ComBbox;
-import com.assets.components.general.ComFunction;
+import com.assets.components.general.ComDraw;
+import com.assets.components.general.ComScript;
 import com.assets.components.general.ComLabel;
 import com.assets.components.general.ComPosition;
+import com.assets.components.general.ComSound;
 import com.assets.components.general.ComSprite;
 import com.assets.components.general.ComTimer;
 import com.assets.components.general.ComVelocity;
@@ -26,6 +28,8 @@ public class ComponentMap{
     public static final ComponentMapper<ComBbox> BBOX = ComponentMapper.getFor(ComBbox.class);
     public static final ComponentMapper<ComLabel> LABEL = ComponentMapper.getFor(ComLabel.class);
     public static final ComponentMapper<ComActor> ACTOR = ComponentMapper.getFor(ComActor.class);
-    public static final ComponentMapper<ComFunction> FUNCTION = ComponentMapper.getFor(ComFunction.class);
+    public static final ComponentMapper<ComScript> SCRIPT = ComponentMapper.getFor(ComScript.class);
+    public static final ComponentMapper<ComSound> SOUND = ComponentMapper.getFor(ComSound.class);
+    public static final ComponentMapper<ComDraw> DRAW = ComponentMapper.getFor(ComDraw.class);
 
 }

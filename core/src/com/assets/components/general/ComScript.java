@@ -6,7 +6,7 @@ import com.util.script.Script;
  *
  * @author Jonathan Crockett
  */
-public class ComFunction implements Component{
+public class ComScript implements Component{
     private Script function;
 
     /**
@@ -18,7 +18,7 @@ public class ComFunction implements Component{
     
     public void executeFunction(){
         if(function != null){
-           function.execute();
+           function.execute(null);
         }
     }
 

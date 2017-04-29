@@ -3,7 +3,7 @@ package com.assets.components.group;
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
 import com.assets.components.general.ComBbox;
-import com.assets.components.general.ComFunction;
+import com.assets.components.general.ComScript;
 import com.assets.components.general.ComPosition;
 import com.assets.components.general.ComSprite;
 import com.assets.components.general.ComLabel;
@@ -18,12 +18,12 @@ public class ComButton implements Component{
     private ComLabel label = new ComLabel();
     private ComPosition pos = new ComPosition();
     private ComSprite spr = new ComSprite();
-    private ComFunction funct = new ComFunction();
+    private ComScript funct = new ComScript();
     private ComBbox bbox = new ComBbox();
     private ComSound sound = new ComSound();
     private boolean highlighted = false;
 
-    private ComButton(ComPosition cPos, ComLabel cLabel, ComSprite cSpr, ComBbox cBbox, ComFunction cFunct, ComSound cSound){
+    private ComButton(ComPosition cPos, ComLabel cLabel, ComSprite cSpr, ComBbox cBbox, ComScript cFunct, ComSound cSound){
         pos = cPos == null ? pos : cPos;
         label = cLabel == null ? label : cLabel;
         spr = cSpr == null ? spr : cSpr;
@@ -32,7 +32,7 @@ public class ComButton implements Component{
         sound = cSound == null ? sound : cSound;
     }
     
-    public static void buildButton(Entity ent, ComPosition pos, ComLabel label, ComSprite spr, ComBbox bbox, ComFunction funct, ComSound sound){
+    public static void buildButton(Entity ent, ComPosition pos, ComLabel label, ComSprite spr, ComBbox bbox, ComScript funct, ComSound sound){
         ComButton btn = new ComButton(pos, label, spr, bbox, funct, sound);
         ent.add(btn);
         ent.add(btn.pos);
@@ -69,7 +69,7 @@ public class ComButton implements Component{
     /**
      * @return the funct
      */
-    public ComFunction getFunct() {
+    public ComScript getFunct() {
         return funct;
     }
 
@@ -104,7 +104,7 @@ public class ComButton implements Component{
     /**
      * @param funct the funct to set
      */
-    public void setFunct(ComFunction funct) {
+    public void setFunct(ComScript funct) {
         this.funct = funct;
     }
 

@@ -85,5 +85,4 @@ public class Tools{
     public static float getMouseY(){
         return (Gdx.graphics.getHeight() - Gdx.input.getY()) * (SceneManager.getView().getHeight() / Gdx.graphics.getHeight());
     }
-    
 }

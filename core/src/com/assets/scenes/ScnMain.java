@@ -6,7 +6,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.assets.attributes.AttParallax;
 import com.assets.components.general.ComBbox;
-import com.assets.components.general.ComFunction;
+import com.assets.components.general.ComDraw;
+import com.assets.components.general.ComScript;
 import com.assets.components.general.ComLabel;
 import com.assets.components.general.ComPosition;
 import com.assets.components.general.ComSound;
@@ -21,10 +22,12 @@ import com.util.graphics.Sprite;
 import com.util.scene.Scene;
 import com.assets.components.group.ComButton;
 import com.assets.components.group.ComTextField;
+import com.assets.scripts.ScrMouseSquares;
 import com.assets.scripts.ScrVolume;
 import com.assets.systems.group.SysButton;
 import com.assets.systems.group.SysTextField;
 import com.global.AudioManager;
+import com.util.GLPrimitives;
 
 /**
  *
@@ -143,7 +146,20 @@ public class ScnMain extends Scene {
             masterVol.add(pos);
             masterVol.add(spr);
             masterVol.add(label);
+            
+        Entity mouseSquares = new Entity();
+            ComDraw draw = new ComDraw();
+            draw.setDraw(new ScrMouseSquares());
         
+            pos = new ComPosition();
+            spr = new ComSprite();
+            
+            mouseSquares.add(draw);
+            mouseSquares.add(pos);
+            mouseSquares.add(spr);
+            
+        putEntity("mouseSquares", mouseSquares);
+            
         putEntity("volume", volumeLevels);
         putEntity("musicVol", musicVol);
         putEntity("soundVol", soundVol);
@@ -196,6 +212,9 @@ public class ScnMain extends Scene {
         activateEntity("hey");
         activateEntity("type");
         
+        activateEntity("mouseSquares");
+        GLPrimitives.setColor(GLPrimitives.Color.YELLOW, 1);
+        
         AudioManager.playMusic("carefree");
     }
     
@@ -223,7 +242,7 @@ public class ScnMain extends Scene {
             label.setHAlign(ComLabel.HAlignment.CENTER);
             label.setLabel(bLabel);
             
-            ComFunction function = new ComFunction();
+            ComScript function = new ComScript();
             function.setFunction(script);
             
             ComSound sound = new ComSound();
@@ -260,7 +279,7 @@ public class ScnMain extends Scene {
             label.setHAlign(ComLabel.HAlignment.CENTER);
             label.setLabel(bLabel);
             
-            ComFunction function = new ComFunction();
+            ComScript function = new ComScript();
             function.setFunction(script);
             
             ComSound sound = new ComSound();

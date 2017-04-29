@@ -1,7 +1,8 @@
 package com.assets.scripts;
 
+import com.util.script.Argument;
 import com.util.script.Script;
-import com.util.script.ScriptReturn;
+import com.util.script.Return;
 
 /**
  *
@@ -10,7 +11,7 @@ import com.util.script.ScriptReturn;
 public class ScrVoid extends Script{
     
     @Override
-    public ScriptReturn scriptMain(){
+    public Return scriptMain(Argument args){
         return null;
     }
 

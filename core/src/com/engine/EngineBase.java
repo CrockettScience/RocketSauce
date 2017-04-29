@@ -15,9 +15,11 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.utils.Align;
 import com.assets.attributes.AttBoundary;
 import com.assets.attributes.AttParallax;
+import com.assets.components.general.ComDraw;
 import com.assets.components.general.ComLabel;
 import com.assets.components.general.ComPosition;
 import com.assets.components.general.ComSprite;
+import com.assets.scripts.arguments.ArgsDraw;
 import com.global.ComponentMap;
 import com.util.scene.SceneManager;
 import com.util.Tools;
@@ -30,23 +32,23 @@ import com.util.input.EngineSystem;
  * @author Jonathan Crockett
  */
 public class EngineBase {
-    private static final SpriteBatch BATCH = new SpriteBatch();
+    public static final SpriteBatch SPRITE_BATCH = new SpriteBatch();
     private static final Engine ENGINE = new Engine();
-    private static FrameBuffer fbo = new FrameBuffer(Pixmap.Format.RGBA8888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
+    private static FrameBuffer FRAME_BUFFER = new FrameBuffer(Pixmap.Format.RGBA8888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
     
     protected static void initialize(int engineCapacity) {
         
         EntitySystem sys;
         
-        sys = new PreDraw(BATCH);
+        sys = new PreDraw();
         sys.priority = engineCapacity;
         ENGINE.addSystem(sys);
         
-        sys = new Draw(BATCH);
+        sys = new Draw();
         sys.priority = ++engineCapacity;
         ENGINE.addSystem(sys);
         
-        sys = new PostDraw(BATCH);
+        sys = new PostDraw();
         sys.priority = ++engineCapacity;
         ENGINE.addSystem(sys);
     }
@@ -89,35 +91,30 @@ public class EngineBase {
     
     public static void resizeFrameBuffer(int width, int height){
         if(width > 0 && height > 0) {
-            fbo.dispose();
-            fbo = new FrameBuffer(Pixmap.Format.RGBA8888, width, height, false);
+            FRAME_BUFFER.dispose();
+            FRAME_BUFFER = new FrameBuffer(Pixmap.Format.RGBA8888, width, height, false);
         }
     }
 
     public static FrameBuffer getFbo() {
-        return fbo;
+        return FRAME_BUFFER;
     }
 
     public static void setFbo(FrameBuffer aFbo) {
-        fbo = aFbo;
+        FRAME_BUFFER = aFbo;
     }
-    
 
-    public static class PreDraw extends EntitySystem {
-        SpriteBatch batch;
+    private static class PreDraw extends EntitySystem {
 
-        public PreDraw(SpriteBatch b){
-            batch = b;
-            
-            //initialize our viewport
+        public PreDraw(){
             SceneManager.setView(new View(0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 0, 0));
-            EntitySystem sys;
         }
 
         public void update(float deltaTime) {
             updateView();
-            beginDraw();
+            maintainFrameBuffer();
             backgroundUpdate();
+            
         }
 
         private void updateView() {
@@ -157,69 +154,81 @@ public class EngineBase {
             }
         }
 
-        private void beginDraw() {
+        private void maintainFrameBuffer() {
             View v = SceneManager.getView();
 
-            batch.setProjectionMatrix(v.getViewport().getCamera().combined);
+            SPRITE_BATCH.setProjectionMatrix(v.getViewport().getCamera().combined);
 
-            //keep fbo in sync with the view
-            if(fbo.getWidth() != (int) Gdx.graphics.getWidth() || fbo.getHeight() != (int) Gdx.graphics.getHeight()){
+            //keep FRAME_BUFFER in sync with the view
+            if(FRAME_BUFFER.getWidth() != (int) Gdx.graphics.getWidth() || FRAME_BUFFER.getHeight() != (int) Gdx.graphics.getHeight()){
                 EngineBase.resizeFrameBuffer((int) Gdx.graphics.getWidth(), (int) Gdx.graphics.getHeight());
             }
         }
 
         private void backgroundUpdate() {
+            FRAME_BUFFER.bind();
+            SPRITE_BATCH.begin();
+                
             if(SceneManager.getCurrentScene().containsAttribute(AttParallax.class)){
-                fbo.bind();
-                batch.begin();
 
                 if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_0 != null){
-                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_0.updateTexture(batch);
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_0.updateTexture(SPRITE_BATCH);
                 }
                 if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_1 != null){
-                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_1.updateTexture(batch);
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_1.updateTexture(SPRITE_BATCH);
                 }
                 if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_2 != null){
-                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_2.updateTexture(batch);
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_2.updateTexture(SPRITE_BATCH);
                 }
                 if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_3 != null){
-                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_3.updateTexture(batch);
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_3.updateTexture(SPRITE_BATCH);
                 }
                 if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_4 != null){
-                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_4.updateTexture(batch);
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_4.updateTexture(SPRITE_BATCH);
                 }
                 if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_5 != null){
-                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_5.updateTexture(batch);
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_5.updateTexture(SPRITE_BATCH);
                 }
                 if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_6 != null){
-                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_6.updateTexture(batch);
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_6.updateTexture(SPRITE_BATCH);
                 }
                 if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_7 != null){
-                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_7.updateTexture(batch);
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_7.updateTexture(SPRITE_BATCH);
                 }
                 if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_8 != null){
-                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_8.updateTexture(batch);
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_8.updateTexture(SPRITE_BATCH);
                 }
                 if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_9 != null){
-                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_9.updateTexture(batch);
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).background_9.updateTexture(SPRITE_BATCH);
                 }
-
-                batch.end();
-                fbo.unbind();
             }
         }
 
     }
     
-    public static class Draw extends SortedIteratingSystem {
-        private SpriteBatch batch;
+    private static class Draw extends SortedIteratingSystem {
 
-        public Draw(SpriteBatch b){
+        public Draw(){
             super(Family.all(ComPosition.class, ComSprite.class).get(), new ZComparator());
-            batch = b;
         }
         
         public void processEntity(Entity ent, float deltaTime){
+            
+            preDraw(ent, deltaTime);
+            draw(ent, deltaTime);
+            postDraw(ent, deltaTime);
+        }
+        
+        private void preDraw(Entity ent, float deltaTime){
+            ComDraw draw = ComponentMap.DRAW.get(ent);
+            if(draw != null && draw.getPreDraw() != null){
+                draw.getPreDraw().execute(new ArgsDraw(ent, deltaTime));
+            }
+            
+        }
+        
+        private void draw(Entity ent, float deltaTime){
+            
             View v = SceneManager.getView();
 
             ComSprite sprite = ComponentMap.SPRITE.get(ent);
@@ -227,17 +236,14 @@ public class EngineBase {
 
             sprite.getSprite().updateAnimation();
 
-            fbo.bind();
-            batch.begin();
-
             if(!Tools.outOfSight(pos, v)){
-                batch.draw(sprite.getSprite().getCurrentFrame(),
+                SPRITE_BATCH.draw(sprite.getSprite().getCurrentFrame(),
                         (pos.getX() - v.getX()) - (sprite.getOffsetX() * sprite.getScaleX()),
                         (pos.getY() - v.getY()) - (sprite.getOffsetY() * sprite.getScaleY()),
                         (sprite.getSprite().getWidth() * sprite.getScaleX()),
                         (sprite.getSprite().getHeight() * sprite.getScaleY()));
-
             }
+            
             ComLabel label = ComponentMap.LABEL.get(ent);
             if(label != null){
                 GlyphLayout text = new GlyphLayout();
@@ -257,12 +263,21 @@ public class EngineBase {
                 }
 
                 text.setText(label.getFont(), str, label.getColor(), sprite.getSprite().getWidth(), hor, true);
-
-                label.getFont().draw(batch, text, (pos.getX() - sprite.getOffsetX()) + label.getX(), (pos.getY() - sprite.getOffsetY()) + label.getY());
+                label.getFont().draw(SPRITE_BATCH, text, (pos.getX() - sprite.getOffsetX()) + label.getX(), (pos.getY() - sprite.getOffsetY()) + label.getY());
+            }
+            
+            ComDraw draw = ComponentMap.DRAW.get(ent);
+            if(draw != null && draw.getDraw() != null){
+                draw.getDraw().execute(new ArgsDraw(ent, deltaTime));
             }
 
-            batch.end();
-            fbo.unbind();
+        }
+        
+        private void postDraw(Entity ent, float deltaTime){
+            ComDraw draw = ComponentMap.DRAW.get(ent);
+            if(draw != null && draw.getPostDraw()!= null){
+                draw.getPostDraw().execute(new ArgsDraw(ent, deltaTime));
+            }
         }
 
         private static class ZComparator implements Comparator<Entity> {
@@ -274,12 +289,7 @@ public class EngineBase {
         }
     }
     
-    public static class PostDraw extends EntitySystem {
-        SpriteBatch batch;
-        
-        public PostDraw(SpriteBatch b) {
-            batch = b;
-        }
+    private static class PostDraw extends EntitySystem {
         
         public void update(float deltaTime) {
             foregroundUpdate();
@@ -289,51 +299,49 @@ public class EngineBase {
         
         private void foregroundUpdate() {
             if(SceneManager.getCurrentScene().containsAttribute(AttParallax.class)){
-                fbo.bind();
-                batch.begin();
+                
                 if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_0 != null){
-                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_0.updateTexture(batch);
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_0.updateTexture(SPRITE_BATCH);
                 }
                 if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_1 != null){
-                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_1.updateTexture(batch);
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_1.updateTexture(SPRITE_BATCH);
                 }
                 if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_2 != null){
-                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_2.updateTexture(batch);
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_2.updateTexture(SPRITE_BATCH);
                 }
                 if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_3 != null){
-                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_3.updateTexture(batch);
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_3.updateTexture(SPRITE_BATCH);
                 }
                 if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_4 != null){
-                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_4.updateTexture(batch);
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_4.updateTexture(SPRITE_BATCH);
                 }
                 if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_5 != null){
-                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_5.updateTexture(batch);
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_5.updateTexture(SPRITE_BATCH);
                 }
                 if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_6 != null){
-                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_6.updateTexture(batch);
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_6.updateTexture(SPRITE_BATCH);
                 }
                 if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_7 != null){
-                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_7.updateTexture(batch);
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_7.updateTexture(SPRITE_BATCH);
                 }
                 if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_8 != null){
-                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_8.updateTexture(batch);
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_8.updateTexture(SPRITE_BATCH);
                 }
                 if(SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_9 != null){
-                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_9.updateTexture(batch);
+                    SceneManager.getCurrentScene().getAttribute(AttParallax.class).foreground_9.updateTexture(SPRITE_BATCH);
                 }
-                batch.end();
-                fbo.unbind();
             }
-
+            SPRITE_BATCH.end();
+            FRAME_BUFFER.unbind();
         }
         
         private void swapBuffer() {
-            TextureRegion fboRegion = new TextureRegion(fbo.getColorBufferTexture());
+            TextureRegion fboRegion = new TextureRegion(FRAME_BUFFER.getColorBufferTexture());
             fboRegion.flip(false, true);
 
-            batch.begin();
-            batch.draw(fboRegion, 0, 0, SceneManager.getView().getWidth(), SceneManager.getView().getHeight());
-            batch.end();
+            SPRITE_BATCH.begin();
+            SPRITE_BATCH.draw(fboRegion, 0, 0, SceneManager.getView().getWidth(), SceneManager.getView().getHeight());
+            SPRITE_BATCH.end();
         }
         
         private void drawGUI() {

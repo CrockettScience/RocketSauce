@@ -16,6 +16,7 @@ public class ComSprite implements Component{
     private int offsetY = 0;
     private float scaleX = 1;
     private float scaleY = 1;
+    private int rotationAngle = 0;
     
     public ComSprite(){
         Texture tex = new Texture("engine\\img_missing.png");
@@ -92,5 +93,13 @@ public class ComSprite implements Component{
      */
     public void setScaleY(float scaleY) {
         this.scaleY = scaleY;
+    }
+
+    public int getRotationAngle() {
+        return rotationAngle;
+    }
+
+    public void setRotationAngle(int rotationAngle) {
+        this.rotationAngle = rotationAngle;
     }
 }
