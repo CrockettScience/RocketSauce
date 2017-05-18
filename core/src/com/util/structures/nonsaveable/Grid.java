@@ -5,7 +5,7 @@ package com.util.structures.nonsaveable;
  * @author Jonathan Crockett
  */
 public class Grid<T> {
-    private T[][] grid;
+    protected T[][] grid;
     private int width;
     private int height;
     

@@ -8,7 +8,6 @@ import com.badlogic.gdx.Input;
  * @author Jonathan Crockett
  */
 public abstract class AbstractMouseInputProcessor {
-    
     private boolean leftPressed = false;
     private boolean rightPressed = false;
     

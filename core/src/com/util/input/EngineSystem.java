@@ -9,7 +9,7 @@ import com.engine.EngineBase;
  */
 public abstract class EngineSystem extends EntitySystem{
     
-    //only exists to guarentee default 
+    //only exists to guarentee default constructor
     public EngineSystem(){}
     
     public abstract void update(float deltaTime);

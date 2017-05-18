@@ -23,31 +23,124 @@ public class Set<T> {
         return currentSize == 0;
     }
 
-    public boolean contains(T e) {
-        int currentPos = findPos(e);
-        T other = mapTable[currentPos] == null ? null : mapTable[currentPos].element;
+    public boolean contains(Object e) {
         
-        return e.equals(other);
+        T element;
+        try{
+            element = (T) e;
+        }
+        catch(ClassCastException ex){
+            return false;
+        }
+        
+        int currentPos = findPos(element);
+        
+        if(mapTable[currentPos] != null){
+            SetEntry i = mapTable[currentPos];
+            
+            while(i.next != null){
+                if(i.element.equals(element) && i.isActive)
+                    return true;
+            
+                i = i.next;
+            }
+        }
+        
+        return false;
     }
 
     public boolean add(T e) {
         return add(constructSetEntry(e));
     }
     
-    protected boolean add(SetEntry<T> entry) {        
+    public Set<T> union(Set<? extends T> otherSet){
+        Set<T> union = new Set<T>();
+        
+        for(SetEntry<T> entry : mapTable){
+            union.add(entry.element);
+        }
+        
+        for(int i = 0; i < otherSet.mapTable.length; i++){
+            union.add(otherSet.mapTable[i].element);
+        }
+        
+        return union;
+    }
+    
+    public Set<T> intersection(Set<? extends T> otherSet){
+        Set<T> intersection = new Set<T>();
+        
+        for(SetEntry<T> entry: mapTable){
+            if(otherSet.contains(entry.element)){
+                intersection.add(entry.element);
+            }
+        }
+        
+        return intersection;
+    }
+    
+    public Set<T> not(Set<? extends T> otherSet){
+        Set<T> not = new Set<T>();
+        
+        for(SetEntry<T> entry : mapTable){
+            if(!otherSet.contains(entry.element)){
+                not.add(entry.element);
+            }
+        }
+        
+        return not;
+    }
+    
+    public Set<T> xor(Set<? extends T> otherSet){
+        Set<T> xor = new Set<T>();
+        
+        for(SetEntry<T> entry : mapTable){
+            if(!otherSet.contains(entry.element)){
+                xor.add(entry.element);
+            }
+        }
+        
+        for(int i = 0; i < otherSet.mapTable.length; i++){
+            if(!this.contains(otherSet.mapTable[i].element)){
+                xor.add(otherSet.mapTable[i].element);
+            }
+        }
+        
+        return xor;
+    }
+    
+    protected boolean add(SetEntry<T> entry) {
         int currentPos = findPos(entry.element);
         
         if(mapTable[currentPos] != null){
-            if(mapTable[currentPos].isActive)
-                return false;
+            SetEntry i = mapTable[currentPos];
+            
+            while(i.next != null && !i.element.equals(entry.element))
+                i = i.next;
+            
+            if(i.element.equals(entry.element)){
+                if(i.isActive)
+                    return false;
+                else{
+                    i.element = entry.element;
+                    currentSize++;
+                    return true;
+                }
+            }
+            else
+                occupied++;
+            
+            i.next = entry;
+            currentSize++;
         }
-        else
+        
+        else{
             occupied++;
+            mapTable[currentPos] = entry;
+            currentSize++;
+        }
         
-        mapTable[currentPos] = entry;
-        currentSize++;
-        
-        if(occupied > mapTable.length / 2)        
+        if(occupied > mapTable.length)        
             rehash();
         
         return true;
@@ -56,13 +149,21 @@ public class Set<T> {
     public boolean remove(T e) {
         int currentPos = findPos(e);
         
-        if(mapTable[currentPos] == null || !mapTable[currentPos].isActive)
-            return false;
+        if(mapTable[currentPos] != null){
+            SetEntry i = mapTable[currentPos];
+            
+            while(i.next != null){
+                if(i.element.equals(e) && i.isActive){
+                    i.isActive = false;
+                    currentSize--;
+                    return true;
+                }
+            
+                i = i.next;
+            }
+        }
         
-        mapTable[currentPos] = null;
-        currentSize--;
-        
-        return true;
+        return false;
     }
 
     public void clear() {
@@ -72,31 +173,20 @@ public class Set<T> {
     }
     
     private int findPos(T e){
-        int offset = 1;
-        int currentPos = Math.abs(e.hashCode() % mapTable.length);
-
-        while(mapTable[currentPos] != null){
-            if(e.equals(mapTable[currentPos].element))   
-                break;
-            
-            currentPos += offset;
-            offset += 2;
-            
-            if(currentPos >= mapTable.length)
-                currentPos -= mapTable.length;
-        }
-        return currentPos;
+        return Math.abs(e.hashCode() % mapTable.length);
     }
     
     private void rehash(){
         SetEntry[] oldArray = mapTable;
         
-        allocateArray(nextPrime(4 * currentSize));
+        allocateArray(nextPrime(2 * currentSize));
         currentSize = 0;
         
         for (SetEntry entry : oldArray) {
-            if (entry != null) {
-                add(entry);
+            SetEntry i = entry;
+            while(i != null){
+                add(i);
+                i = i.next;
             }
         }
     }
@@ -135,7 +225,8 @@ public class Set<T> {
     
     protected class SetEntry<T> {
         protected T element;
-        boolean isActive;
+        private boolean isActive;
+        protected SetEntry next = null;
         
         protected SetEntry(T e) {
             element = e;
