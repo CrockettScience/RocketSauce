@@ -6,7 +6,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.assets.components.general.ComPosition;
 import com.assets.components.general.ComVelocity;
-import com.util.input.EngineSystem;
+import com.assets.systems.EngineSystem;
 import com.global.ComponentMap;
 
 /**

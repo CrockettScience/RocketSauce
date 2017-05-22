@@ -13,7 +13,7 @@ import com.assets.components.general.ComPosition;
 import com.assets.components.general.ComSound;
 import com.assets.components.general.ComSprite;
 import com.assets.scripts.ScrQuit;
-import com.util.input.EngineSystem;
+import com.assets.systems.EngineSystem;
 import com.util.script.Script;
 import com.global.TextureManager;
 import com.util.Tools;
@@ -28,6 +28,8 @@ import com.assets.systems.group.SysButton;
 import com.assets.systems.group.SysTextField;
 import com.global.AudioManager;
 import com.util.GLPrimitives;
+import com.util.input.core.InputDispatcher;
+import com.util.input.devices.InputDeviceKeyboard;
 
 /**
  *
@@ -195,6 +197,8 @@ public class ScnMain extends Scene {
 
     @Override
     protected void sceneMain() {
+        InputDispatcher.setDevice(new InputDeviceKeyboard());
+        
         activateEntity("volume");
         activateEntity("musicVol");
         activateEntity("soundVol");

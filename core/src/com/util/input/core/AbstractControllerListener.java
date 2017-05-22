@@ -1,4 +1,4 @@
-package com.util.input;
+package com.util.input.core;
 
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerListener;
@@ -30,5 +30,4 @@ public abstract class AbstractControllerListener implements ControllerListener{
     public boolean accelerometerMoved(Controller pad, int i, Vector3 vctr) {
         return false;
     }
-    
 }

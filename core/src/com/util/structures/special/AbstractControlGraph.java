@@ -1,4 +1,4 @@
-package com.util.input;
+package com.util.structures.special;
 
 /**
  *

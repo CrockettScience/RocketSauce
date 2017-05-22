@@ -12,22 +12,23 @@ import com.assets.components.general.ComBbox;
 import com.assets.components.general.ComLabel;
 import com.assets.components.general.ComPosition;
 import com.assets.components.general.ComSprite;
-import com.util.input.EngineSystem;
+import com.assets.systems.EngineSystem;
 import com.global.ComponentMap;
-import com.util.input.processors.TextInputProcessor;
+import com.util.input.processors.TextInputListener;
 import com.util.Tools;
+import com.util.input.core.InputDispatcher;
 
 /**
  *
  * @author Jonathan Crockett
  */
 public class SysTextField extends EngineSystem{
-    private TextInputProcessor text = new TextInputProcessor();
+    private TextInputListener text = new TextInputListener();
     private ImmutableArray<Entity> entities;
     
     @Override
     public void addedToEngine(Engine engine) {
-        Gdx.input.setInputProcessor(text);
+        InputDispatcher.bind(text);
         entities = engine.getEntitiesFor(Family.all(ComTextField.class).get());
     }
     

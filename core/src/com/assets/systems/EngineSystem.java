@@ -1,4 +1,4 @@
-package com.util.input;
+package com.assets.systems;
 
 import com.badlogic.ashley.core.EntitySystem;
 import com.engine.EngineBase;

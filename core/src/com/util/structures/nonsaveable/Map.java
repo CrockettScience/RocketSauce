@@ -36,7 +36,7 @@ public class Map<K,V> {
     }
     
     public V get(K key) {
-        return mapTable[findPos(key)].value;
+        return mapTable[findPos(key)] == null ? null : mapTable[findPos(key)].value;
     }
     
     protected boolean add(MapEntry<K,V> entry) {        
@@ -90,6 +90,7 @@ public class Map<K,V> {
             if(currentPos >= mapTable.length)
                 currentPos -= mapTable.length;
         }
+        
         return currentPos;
     }
     
