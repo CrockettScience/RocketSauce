@@ -1,6 +1,8 @@
 package com.util.structures.saveable;
 
-import com.util.structures.*;
+import com.util.structures.saveable.util.SaveableData;
+import com.util.structures.saveable.util.SaveableStructure;
+import com.util.structures.saveable.util.CreateData;
 import com.util.structures.nonsaveable.*;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,9 +16,9 @@ import java.util.logging.Logger;
  *
  * @author Jonathan Crockett
  */
-public class SaveableGrid<T extends SaveableData> extends Grid<T> implements SaveableStructure<T>{
+public class SaveableArrayGrid<T extends SaveableData> extends ArrayGrid<T> implements SaveableStructure<T>{
 
-    public SaveableGrid(int w, int h) {
+    public SaveableArrayGrid(int w, int h) {
         super(w, h);
     }
 

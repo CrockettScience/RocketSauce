@@ -1,5 +1,8 @@
 package com.util.structures.saveable;
 
+import com.util.structures.saveable.util.SaveableData;
+import com.util.structures.saveable.util.SaveableStructure;
+import com.util.structures.saveable.util.CreateData;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -8,7 +11,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.util.structures.*;
 import com.util.structures.nonsaveable.Map;
 import com.util.structures.saveable.SaveableMap.SaveableMapEntry;
 
@@ -64,7 +66,7 @@ public class SaveableMap<K extends SaveableData, V extends SaveableData> extends
         
     }
     
-    protected MapEntry<K, V> constructMapEntry(K key, V val){
+    protected MapEntry<? extends K, ? extends V> constructMapEntry(K key, V val){
         return new SaveableMapEntry(key, val);
     }
     

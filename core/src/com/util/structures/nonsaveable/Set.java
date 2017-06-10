@@ -50,7 +50,7 @@ public class Set<T> {
     }
 
     public boolean add(T e) {
-        return add(constructSetEntry(e));
+        return add(new SetEntry(e));
     }
     
     public Set<T> union(Set<? extends T> otherSet){
@@ -109,7 +109,7 @@ public class Set<T> {
         return xor;
     }
     
-    protected boolean add(SetEntry<T> entry) {
+    private boolean add(SetEntry<T> entry) {
         int currentPos = findPos(entry.element);
         
         if(mapTable[currentPos] != null){
@@ -219,14 +219,10 @@ public class Set<T> {
         mapTable = new SetEntry[nextPrime(arraySize)];
     }
     
-    protected SetEntry<T> constructSetEntry(T e){
-        return new SetEntry(e);
-    }
-    
     protected class SetEntry<T> {
-        protected T element;
+        public T element;
         private boolean isActive;
-        protected SetEntry next = null;
+        public SetEntry next = null;
         
         protected SetEntry(T e) {
             element = e;

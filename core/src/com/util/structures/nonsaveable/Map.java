@@ -5,10 +5,10 @@ package com.util.structures.nonsaveable;
  *
  * @author Jonathan Crockett
  */
-public class Map<K,V> {
+public class Map<K, V> {
     private static final int DEFAULT_TABLE_SIZE = 101;
     
-    protected MapEntry<K,V>[] mapTable;
+    protected MapEntry<? extends K, ? extends V>[] mapTable;
     private int occupied;
     private int currentSize;
 
@@ -39,7 +39,7 @@ public class Map<K,V> {
         return mapTable[findPos(key)] == null ? null : mapTable[findPos(key)].value;
     }
     
-    protected boolean add(MapEntry<K,V> entry) {        
+    protected boolean add(MapEntry<? extends K, ? extends V> entry) {        
         int currentPos = findPos(entry.key);
         
         if(mapTable[currentPos] != null){
@@ -132,10 +132,10 @@ public class Map<K,V> {
     }
     
     private void allocateArray(int arraySize){
-        mapTable = new MapEntry[nextPrime(arraySize)];
+        mapTable = (MapEntry<? extends K, ? extends V>[]) new MapEntry[nextPrime(arraySize)];
     }
     
-    protected MapEntry<K,V> constructMapEntry(K key, V val){
+    protected MapEntry<? extends K,? extends V> constructMapEntry(K key, V val){
         return new MapEntry(key, val);
     }
     

@@ -15,15 +15,15 @@ public class HashGrid<T> {
         if(x < 0 || y < 0)
             throw new ArrayIndexOutOfBoundsException();
         
-        Coordinates point = new Coordinates(x,y);
-        gridMap.put(point, data);        
+        Coordinates point = makeCoordinates(x, y);
+        gridMap.put(point, data); 
     }
     
     public T get(int x, int y) {
         if(x < 0 || y < 0)
             throw new ArrayIndexOutOfBoundsException();
         
-        return gridMap.get(new Coordinates(x,y));
+        return gridMap.get(makeCoordinates(x,y));
     }
     
     public int size() {
@@ -32,6 +32,10 @@ public class HashGrid<T> {
     
     public void clear() {
         gridMap = new Map<Coordinates, T>();
+    }
+    
+    protected Coordinates makeCoordinates(int x, int y){
+        return new Coordinates(x, y);
     }
             
     protected static class Coordinates {

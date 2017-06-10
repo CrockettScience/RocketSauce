@@ -4,12 +4,12 @@ package com.util.structures.nonsaveable;
  *
  * @author Jonathan Crockett
  */
-public class Grid<T> {
+public class ArrayGrid<T> {
     protected T[][] grid;
     private int width;
     private int height;
     
-    public Grid(int w, int h) {
+    public ArrayGrid(int w, int h) {
         width = w;
         height = h;
         clear();
